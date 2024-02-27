@@ -2,6 +2,13 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <div class="flex flex-col justify-center items-center w-screen h-screen bg-black">
+        <div class="mx-auto max-w-7xl lg:grid-cols-3">
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Login</h2>
+        </div>
+
+        <div class="mx-auto mt-10 max-w-7xl gap-x-8 gap-y-16 border-t border-gray-200">
+        </div>
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -44,4 +51,5 @@
             </x-primary-button>
         </div>
     </form>
+</div>
 </x-guest-layout>

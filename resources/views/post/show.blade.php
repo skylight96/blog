@@ -39,8 +39,26 @@
                     <p>{{ $post->body }}</p>
                 </div>
             </div>
-            <div class="flex justify-center rounded-md w-28 border-solid border-2 border-black hover:text-blue-600">
-                <a href="{{ route('posts.index') }}"><button>Back to Posts</button></a>
+            <div class="flex flex-row">
+                <div class="flex justify-center rounded-md w-28 border-solid border-2 border-black hover:text-blue-600">
+                    <a href="{{ route('posts.index') }}"><button>Back to Posts</button></a>
+                </div>
+
+                @if (Auth::id() === $post->user_id)
+                    <div
+                        class="flex justify-center rounded-md w-28 border-solid border-2 border-black hover:text-blue-600">
+                        <a href="{{ route('posts.edit', $post) }}"><button>Edit Post</button></a>
+                    </div>
+                    <div
+                        class="flex justify-center rounded-md w-28 border-solid border-2 border-black hover:text-red-600">
+                        <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button>Delete Post</button>
+                        </form>
+                    </div>
+                @endif
+
             </div>
         </div>
 

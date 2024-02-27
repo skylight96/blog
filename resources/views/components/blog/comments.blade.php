@@ -12,14 +12,16 @@
                             {{ $comment->created_at->toFormattedDateString() }}</p>
                     </div>
 
-                    <form
-                        action="{{ route('posts.comments.destroy', [$comment->post->slug, $comment->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="mt-2 border p-2 rounded-md hover:bg-blue-400" type="submit"
-                            value="Submit">Delete
-                            Comment</button>
-                    </form>
+                    @if (Auth::check() && Auth::id() === $comment->user_id || Auth::user()->is_admin)
+                        <form action="{{ route('posts.comments.destroy', [$comment->post->slug, $comment->id]) }}"
+                            method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mt-2 border p-2 rounded-md hover:bg-blue-400" type="submit"
+                                value="Submit">Delete
+                                Comment</button>
+                        </form>
+                    @endif
                 </div>
             </div>
 
