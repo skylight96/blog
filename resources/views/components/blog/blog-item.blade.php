@@ -13,19 +13,26 @@
             alt="" class="h-10 w-10 rounded-full bg-gray-50">
         <div class="text-sm leading-6">
             <p class="font-semibold text-gray-900">
-                <a href="#">
+                <a href="{{route('posts.index', ['author' => $post->user->name])}}">
                     <span class="absolute inset-0"></span>
                     {{ $post->user->name }}
                 </a>
             </p>
         </div>
         <div class="flex flex-col items-left text-xs">
-            <time datetime="2020-03-16"
-                class="text-gray-500">{{ $post->created_at->toFormattedDateString() }}</time>
-            
+            <time datetime="2020-03-16" class="text-gray-500">{{ $post->created_at->toFormattedDateString() }}</time>
+
         </div>
-        
+
     </div>
-    <a href="#"
-                class="flex justify-center mt-5 p-2 rounded-full bg-gray-500 font-medium text-gray-900 hover:text-slate-100 hover:bg-gray-700">{{ $post->category }}</a>
+
+    <div class="flex flex-row">
+        <a href="{{route('posts.index', ['category' => $post->category])}}"
+            class="flex justify-center mt-5 p-2 rounded-full bg-gray-500 font-medium text-gray-900 hover:text-slate-100 hover:bg-gray-700">{{ $post->category }}</a>
+        @if (Route::is('dashboard')) 
+            <p
+                class="flex justify-center mt-5 p-2 rounded-full bg-gray-500 font-medium text-gray-900 hover:text-slate-100 hover:bg-gray-700">{{ $post->status }}</p>
+        @endif
+
+    </div>
 </article>

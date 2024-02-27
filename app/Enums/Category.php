@@ -1,7 +1,7 @@
 <?php
 namespace App\Enums;
 
-enum Status: string
+enum Category: string
 {
     case Personal = 'personal';
     case Trucking = 'trucking';

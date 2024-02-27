@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -69,7 +70,10 @@ class CommentController extends Controller
      */
     public function destroy(Post $post, Comment $comment)
     {
-      $comment->delete();
-      return redirect()->back();
+        if (Auth::id() !== $comment->user_id && !Auth::user()->is_admin)  
+        return abort(403, "This isn't your comment bitch");
+
+            $comment->delete();
+            return redirect()->back();
     }
 }
